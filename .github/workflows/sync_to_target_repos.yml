@@ -1,0 +1,25 @@
+name: Sync to Target Repos
+on:
+  push:
+    branches: [main]
+
+  # to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  sync-to-targets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Push to HF spaces
+        env:
+          HF: ${{ secrets.HF }}
+        run: git push --force https://soumyaprabhamaiti:$HF@huggingface.co/spaces/soumyaprabhamaiti/pet-image-segmentation-pytorch main
+      - name: Push to core lib github repo
+        env:
+          CORE_LIB_GH_PAT: ${{ secrets.CORE_LIB_GH_PAT }}
+          CORE_LIB_REPO_NAME: pet_seg_core
+        run: rm -rf .git && cd $CORE_LIB_REPO_NAME && git config --global user.email "73134224+soumya-prabha-maiti@users.noreply.github.com" && git config --global user.name "Github Actions (on behalf of Soumya Prabha Maiti)" && git init --initial-branch=main && git add . && git commit -m "Modify core library" && git remote add origin https://$CORE_LIB_GH_PAT@github.com/soumya-prabha-maiti/$CORE_LIB_REPO_NAME.git && git push -u origin main --force
