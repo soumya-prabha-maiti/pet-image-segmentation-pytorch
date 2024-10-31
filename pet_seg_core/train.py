@@ -2,7 +2,7 @@ import lightning as pl
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.loggers import CSVLogger
 from datetime import datetime
-import os
+from pathlib import Path
 
 from pet_seg_core.config import PetSegTrainConfig
 from pet_seg_core.data import train_dataloader, val_dataloader
@@ -11,7 +11,7 @@ from pet_seg_core.model import UNet
 def train():
     curr_time = datetime.now().strftime('%Y-%m-%d_%H:%M:%S.%f')
     results_folder = f"results/{curr_time}"
-    os.mkdir(results_folder)
+    Path(results_folder).mkdir(parents=True, exist_ok=True)
     with open(f"{results_folder}/description.txt", "w") as f:
         f.write(PetSegTrainConfig.DESCRIPTION_TEXT)
 
