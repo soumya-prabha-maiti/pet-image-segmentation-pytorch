@@ -18,7 +18,7 @@ if PetSegWebappConfig.DOWNLOAD_MODEL_WEIGTHS_FROM_GDRIVE:
         PetSegWebappConfig.MODEL_WEIGHTS_GDRIVE_FILE_ID, PetSegWebappConfig.MODEL_WEIGHTS_LOCAL_PATH
     )
 
-model = UNet.load_from_checkpoint(PetSegWebappConfig.MODEL_WEIGHTS_LOCAL_PATH)
+model = UNet.load_from_checkpoint(PetSegWebappConfig.MODEL_WEIGHTS_LOCAL_PATH).to(device)
 model.eval()
 
 def segment_image(img):
