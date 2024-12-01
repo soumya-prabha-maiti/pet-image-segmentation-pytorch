@@ -185,6 +185,12 @@ The UNET model consists of an encoder and a decoder. The encoder is a series of 
     ==========================================================================================
 </details>
 
+## Metrics
+|                                             | # Parameters | Foreground IoU | Background IoU | Boundary IoU |
+|---------------------------------------------|--------------|----------------|----------------|--------------|
+| U-Net                                       | 7.8 M        | 0.72           | 0.84           | 0.36         |
+| U-Net with depthwise separable convolutions | 1.5 M        | 0.71           | 0.83           | 0.32         |
+
 ## Libraries Used
 
 The following libraries were used in this project:
