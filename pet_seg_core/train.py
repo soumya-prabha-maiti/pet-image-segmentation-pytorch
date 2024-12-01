@@ -9,7 +9,7 @@ from pet_seg_core.data import train_dataloader, val_dataloader
 from pet_seg_core.model import UNet
 
 def train():
-    curr_time = datetime.now().strftime('%Y-%m-%d_%H:%M:%S.%f')
+    curr_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S-%f')
     results_folder = f"results/{curr_time}"
     Path(results_folder).mkdir(parents=True, exist_ok=True)
     with open(f"{results_folder}/description.txt", "w") as f:
